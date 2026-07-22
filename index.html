@@ -2,12 +2,408 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Sayvvy</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="app"></div>
+<div class="app">
+
+<!-- SCREEN 1: SPLASH -->
+<div class="screen active" id="screen-splash" style="justify-content:center;align-items:center;text-align:center;gap:0;">
+  <div style="margin-bottom:16px;">
+    <div class="logo" style="font-size:28px;margin-bottom:4px;">Sayv<span>vy</span></div>
+    <p style="font-size:13px;color:var(--text3);">communication mastery</p>
+  </div>
+  <svg width="160" height="160" viewBox="0 0 120 120" fill="none" style="margin:8px auto 24px;display:block;">
+    <ellipse cx="60" cy="72" rx="34" ry="30" fill="#EEEDFE"/>
+    <ellipse cx="60" cy="68" rx="22" ry="24" fill="#FAC775"/>
+    <ellipse cx="60" cy="82" rx="15" ry="9" fill="#F5C4B3"/>
+    <circle cx="49" cy="62" r="5.5" fill="#fff"/><circle cx="71" cy="62" r="5.5" fill="#fff"/>
+    <circle cx="50.5" cy="62" r="3" fill="#26215C"/><circle cx="72.5" cy="62" r="3" fill="#26215C"/>
+    <circle cx="51.5" cy="61" r="1" fill="#fff"/><circle cx="73.5" cy="61" r="1" fill="#fff"/>
+    <ellipse cx="60" cy="72" rx="5" ry="3.5" fill="#D85A30"/>
+    <path d="M54 76 Q60 80 66 76" stroke="#D85A30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="22" cy="56" rx="15" ry="19" fill="#7F77DD"/>
+    <ellipse cx="98" cy="56" rx="15" ry="19" fill="#7F77DD"/>
+    <ellipse cx="25" cy="60" rx="9" ry="13" fill="#534AB7"/>
+    <ellipse cx="95" cy="60" rx="9" ry="13" fill="#534AB7"/>
+    <path d="M36 36 Q60 18 84 36" stroke="#7F77DD" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <ellipse cx="60" cy="36" rx="20" ry="10" fill="#AFA9EC"/>
+    <ellipse cx="60" cy="33" rx="12" ry="6" fill="#CECBF6"/>
+  </svg>
+  <div style="max-width:280px;margin:0 auto 32px;">
+    <h1 style="margin-bottom:10px;">Own every room.<br>Command every conversation.</h1>
+    <p>Rao trains you daily with the world's most proven communication techniques.</p>
+  </div>
+  <div style="width:100%;display:flex;flex-direction:column;gap:10px;">
+    <button class="btn" onclick="goTo('screen-info')">Get started</button>
+    <button class="btn-ghost" onclick="goTo('screen-home')">Sign in</button>
+  </div>
+  <p style="font-size:12px;margin-top:16px;color:var(--text3);">Free to start · No credit card needed</p>
+</div>
+
+<!-- SCREEN 2: BASIC INFO -->
+<div class="screen" id="screen-info">
+  <div class="progress-wrap"><div class="progress-fill" style="width:20%"></div></div>
+  <p class="label" style="margin-bottom:4px;">Step 1 of 4</p>
+  <h2 style="margin-bottom:6px;">Let's get to know you</h2>
+  <p style="margin-bottom:20px;">Tell us your name and what you want to master.</p>
+  <div style="margin-bottom:18px;">
+    <label style="font-size:13px;font-weight:600;color:var(--text);display:block;margin-bottom:6px;">Your name</label>
+    <input type="text" id="name-input" placeholder="What do we call you?">
+  </div>
+  <label style="font-size:13px;font-weight:600;color:var(--text);display:block;margin-bottom:6px;">What do you want to master? <span style="font-weight:400;color:var(--text3);">(pick up to 3)</span></label>
+  <div class="goals-list">
+    <div class="option" onclick="toggleGoal(this,'confidence')"><div class="option-check"></div><span class="option-text">Speak with confidence</span></div>
+    <div class="option" onclick="toggleGoal(this,'persuade')"><div class="option-check"></div><span class="option-text">Persuade and influence</span></div>
+    <div class="option" onclick="toggleGoal(this,'conflict')"><div class="option-check"></div><span class="option-text">Handle conflict better</span></div>
+    <div class="option" onclick="toggleGoal(this,'negotiate')"><div class="option-check"></div><span class="option-text">Negotiate better outcomes</span></div>
+    <div class="option" onclick="toggleGoal(this,'impression')"><div class="option-check"></div><span class="option-text">Make strong first impressions</span></div>
+    <div class="option" onclick="toggleGoal(this,'public')"><div class="option-check"></div><span class="option-text">Public speaking</span></div>
+    <div class="option" onclick="toggleGoal(this,'cold')"><div class="option-check"></div><span class="option-text">Cold approach and networking</span></div>
+    <div class="option" onclick="toggleGoal(this,'interview')"><div class="option-check"></div><span class="option-text">Interview communication</span></div>
+    <div class="option" onclick="toggleGoal(this,'read')"><div class="option-check"></div><span class="option-text">Read people better</span></div>
+    <div class="option" onclick="toggleGoal(this,'story')"><div class="option-check"></div><span class="option-text">Storytelling and connection</span></div>
+  </div>
+  <div style="margin-top:16px;">
+    <button class="btn" id="info-btn" disabled onclick="goTo('screen-voice')">Continue</button>
+  </div>
+</div>
+
+<!-- SCREEN 3: VOICE ONBOARDING -->
+<div class="screen" id="screen-voice" style="align-items:center;">
+  <div style="width:100%;">
+    <div class="progress-wrap"><div class="progress-fill" style="width:45%"></div></div>
+    <p class="label" style="margin-bottom:4px;">Step 2 of 4</p>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;text-align:center;gap:16px;">
+    <svg width="80" height="80" viewBox="0 0 120 120" fill="none" style="display:block;margin:0 auto;">
+      <ellipse cx="60" cy="72" rx="34" ry="30" fill="#EEEDFE"/>
+      <ellipse cx="60" cy="68" rx="22" ry="24" fill="#FAC775"/>
+      <circle cx="49" cy="62" r="5.5" fill="#fff"/><circle cx="71" cy="62" r="5.5" fill="#fff"/>
+      <circle cx="50.5" cy="62" r="3" fill="#26215C"/><circle cx="72.5" cy="62" r="3" fill="#26215C"/>
+      <ellipse cx="60" cy="72" rx="5" ry="3.5" fill="#D85A30"/>
+      <ellipse cx="22" cy="56" rx="15" ry="19" fill="#7F77DD"/>
+      <ellipse cx="98" cy="56" rx="15" ry="19" fill="#7F77DD"/>
+      <ellipse cx="25" cy="60" rx="9" ry="13" fill="#534AB7"/>
+      <ellipse cx="95" cy="60" rx="9" ry="13" fill="#534AB7"/>
+      <path d="M36 36 Q60 18 84 36" stroke="#7F77DD" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <ellipse cx="60" cy="36" rx="20" ry="10" fill="#AFA9EC"/>
+    </svg>
+    <div>
+      <h2 style="margin-bottom:8px;">Let Rao hear you</h2>
+      <p style="max-width:280px;margin:0 auto;">Talk for 5 minutes — your goals, your story, anything. Just speak naturally.</p>
+    </div>
+    <div class="card" style="width:100%;padding:20px;">
+      <div class="waveform" id="waveform" style="margin-bottom:16px;">
+        <div class="wave-bar" style="height:6px;"></div>
+        <div class="wave-bar" style="height:10px;"></div>
+        <div class="wave-bar" style="height:6px;"></div>
+        <div class="wave-bar" style="height:14px;"></div>
+        <div class="wave-bar" style="height:8px;"></div>
+        <div class="wave-bar" style="height:18px;"></div>
+        <div class="wave-bar" style="height:10px;"></div>
+        <div class="wave-bar" style="height:6px;"></div>
+        <div class="wave-bar" style="height:14px;"></div>
+        <div class="wave-bar" style="height:8px;"></div>
+        <div class="wave-bar" style="height:16px;"></div>
+        <div class="wave-bar" style="height:6px;"></div>
+      </div>
+      <div id="timer-display" style="font-size:28px;font-weight:700;color:var(--p600);text-align:center;margin-bottom:16px;">5:00</div>
+      <button class="rec-btn" id="rec-btn" onclick="toggleRecording()">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <rect x="9" y="2" width="6" height="13" rx="3" fill="white"/>
+          <path d="M5 10a7 7 0 0014 0" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <line x1="12" y1="19" x2="12" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <line x1="8" y1="23" x2="16" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <p id="rec-status" style="text-align:center;margin-top:12px;font-size:13px;color:var(--text3);">Tap to start recording</p>
+    </div>
+    <p style="font-size:12px;color:var(--text3);">Rao listens. Your presence revealed after.</p>
+  </div>
+  <div style="width:100%;margin-top:16px;">
+    <button class="btn" id="voice-next-btn" disabled onclick="startPresenceAnalysis()">Reveal my presence</button>
+    <button class="btn-ghost" style="margin-top:8px;" onclick="skipVoice()">Skip for now</button>
+  </div>
+</div>
+
+<!-- SCREEN 4: PROCESSING -->
+<div class="screen" id="screen-processing" style="justify-content:center;align-items:center;text-align:center;gap:20px;">
+  <svg width="100" height="100" viewBox="0 0 120 120" fill="none" style="display:block;margin:0 auto;">
+    <ellipse cx="60" cy="72" rx="34" ry="30" fill="#EEEDFE"/>
+    <ellipse cx="60" cy="68" rx="22" ry="24" fill="#FAC775"/>
+    <circle cx="49" cy="62" r="5.5" fill="#fff"/><circle cx="71" cy="62" r="5.5" fill="#fff"/>
+    <circle cx="50.5" cy="62" r="3" fill="#26215C"/><circle cx="72.5" cy="62" r="3" fill="#26215C"/>
+    <ellipse cx="60" cy="72" rx="5" ry="3.5" fill="#D85A30"/>
+    <ellipse cx="22" cy="56" rx="15" ry="19" fill="#7F77DD"/>
+    <ellipse cx="98" cy="56" rx="15" ry="19" fill="#7F77DD"/>
+    <ellipse cx="25" cy="60" rx="9" ry="13" fill="#534AB7"/>
+    <ellipse cx="95" cy="60" rx="9" ry="13" fill="#534AB7"/>
+    <path d="M36 36 Q60 18 84 36" stroke="#7F77DD" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <ellipse cx="60" cy="36" rx="20" ry="10" fill="#AFA9EC"/>
+  </svg>
+  <div>
+    <h2 style="margin-bottom:8px;">Rao is reading you...</h2>
+    <p id="processing-text">Mapping your communication style</p>
+  </div>
+  <div class="spinner"></div>
+  <p style="font-size:12px;color:var(--text3);">About 30 seconds</p>
+</div>
+
+<!-- SCREEN 5: YOUR PRESENCE -->
+<div class="screen" id="screen-presence">
+  <div class="progress-wrap"><div class="progress-fill" style="width:75%"></div></div>
+  <p class="label" style="margin-bottom:4px;">Step 3 of 4</p>
+  <div class="presence-tag" style="margin-bottom:8px;" id="presence-tag">The Hesitant Strategist</div>
+  <h2 style="margin-bottom:8px;" id="presence-title">Your Presence</h2>
+  <p style="margin-bottom:16px;" id="presence-desc">Your ideas are sharp. Your delivery holds them back.</p>
+  <div class="card-purple" style="margin-bottom:12px;">
+    <p class="label" style="margin-bottom:12px;">Where you stand today</p>
+    <div id="trait-rows"></div>
+  </div>
+  <div class="card" style="margin-bottom:16px;">
+    <p class="label" style="margin-bottom:6px;">Rao starts you here</p>
+    <p id="training-start">Voss's tactical empathy to hold your ground.</p>
+  </div>
+  <p style="font-size:12px;color:var(--text3);text-align:center;margin-bottom:16px;">7 advanced skills unlock as you grow</p>
+  <button class="btn" onclick="goTo('screen-home')">Start training with Rao</button>
+</div>
+
+<!-- SCREEN 6: HOME -->
+<div class="screen" id="screen-home">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+    <div>
+      <p style="font-size:13px;color:var(--text3);">Good morning,</p>
+      <h2 id="home-name">there</h2>
+    </div>
+    <div class="streak-badge">🔥 <span id="streak-count">1</span> day</div>
+  </div>
+  <div class="ai-card" style="margin-bottom:14px;">
+    <div class="rao-mini">
+      <svg width="24" height="24" viewBox="0 0 120 120" fill="none">
+        <ellipse cx="60" cy="72" rx="34" ry="30" fill="#EEEDFE"/>
+        <ellipse cx="60" cy="68" rx="22" ry="24" fill="#FAC775"/>
+        <circle cx="49" cy="62" r="5.5" fill="#fff"/><circle cx="71" cy="62" r="5.5" fill="#fff"/>
+        <circle cx="50.5" cy="62" r="3" fill="#26215C"/><circle cx="72.5" cy="62" r="3" fill="#26215C"/>
+        <ellipse cx="22" cy="56" rx="15" ry="19" fill="#7F77DD"/>
+        <ellipse cx="98" cy="56" rx="15" ry="19" fill="#7F77DD"/>
+        <path d="M36 36 Q60 18 84 36" stroke="#7F77DD" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <ellipse cx="60" cy="36" rx="20" ry="10" fill="#AFA9EC"/>
+      </svg>
+      <span class="rao-text">RAO'S READ ON YOU TODAY</span>
+    </div>
+    <p style="font-size:14px;color:var(--p900);" id="rao-insight">Your confidence is your biggest lever. Today's challenge hits it directly.</p>
+  </div>
+  <div class="card-dark" style="margin-bottom:14px;">
+    <p class="label" style="color:#AFA9EC;margin-bottom:6px;">Today's challenge</p>
+    <p style="font-size:15px;color:#fff;line-height:1.5;margin-bottom:10px;" id="home-scenario-text">Loading your challenge...</p>
+    <p style="font-size:12px;color:var(--p200);margin-bottom:12px;" id="home-technique"></p>
+    <button class="btn" style="background:var(--p400);font-size:14px;padding:12px;" onclick="startConversation()">Start challenge</button>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+    <div class="card">
+      <p style="font-size:12px;color:var(--text3);margin-bottom:4px;">Presence score</p>
+      <p style="font-size:26px;font-weight:700;color:var(--text);" id="presence-score">64</p>
+      <p style="font-size:12px;color:var(--t400);">+8 this week</p>
+    </div>
+    <div class="card">
+      <p style="font-size:12px;color:var(--text3);margin-bottom:4px;">Techniques</p>
+      <p style="font-size:26px;font-weight:700;color:var(--text);">12</p>
+      <p style="font-size:12px;color:var(--p400);">3 mastered</p>
+    </div>
+  </div>
+  <div class="card" style="cursor:pointer;" onclick="goTo('screen-decoder')">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <p class="label" style="margin-bottom:3px;">People decoder</p>
+        <p style="font-size:13px;">Paste any message — Rao decodes them</p>
+      </div>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="var(--p400)" stroke-width="2" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="goTo('screen-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div>
+    <div class="nav-item" onclick="startConversation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg><span>Train</span></div>
+    <div class="nav-item" onclick="goTo('screen-decoder')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span>Decode</span></div>
+    <div class="nav-item" onclick="goTo('screen-progress')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Progress</span></div>
+    <div class="nav-item" onclick="goTo('screen-progress')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div>
+  </div>
+</div>
+
+<!-- SCREEN 7: LIVE CONVERSATION -->
+<div class="screen" id="screen-conversation">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+    <button onclick="goTo('screen-home')" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;">← Back</button>
+    <p class="label" id="conv-scenario-title">Challenge</p>
+    <p style="font-size:11px;color:var(--p400);" id="conv-technique"></p>
+  </div>
+  <div class="card" style="margin-bottom:12px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+      <p class="label" id="conv-character-name">The Dismisser</p>
+      <p style="font-size:11px;color:var(--text3);" id="conv-character-role">Senior Manager</p>
+    </div>
+    <p style="font-size:13px;color:var(--text2);" id="conv-scenario-context"></p>
+  </div>
+  <div class="conversation-wrap" id="conversation-wrap"></div>
+  <div id="conv-hint-box" style="display:none;margin-bottom:8px;" class="card-purple">
+    <p style="font-size:13px;color:var(--p800);" id="conv-hint-text"></p>
+  </div>
+  <textarea id="conv-input" rows="3" placeholder="Type your response..." oninput="checkConvBtn()" style="margin-bottom:8px;"></textarea>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+    <button class="btn-ghost btn-sm" style="width:100%;" onclick="showHint()">💡 Hint</button>
+    <button class="btn-ghost btn-sm" style="width:100%;" id="conv-send-btn" disabled onclick="sendUserResponse()">Send →</button>
+  </div>
+  <button class="end-btn" onclick="endConversation()">End conversation — get Rao's breakdown</button>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="goTo('screen-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div>
+    <div class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg><span>Train</span></div>
+    <div class="nav-item" onclick="goTo('screen-decoder')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Decode</span></div>
+    <div class="nav-item" onclick="goTo('screen-progress')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Progress</span></div>
+    <div class="nav-item" onclick="goTo('screen-progress')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div>
+  </div>
+</div>
+
+<!-- SCREEN 8: BREAKDOWN -->
+<div class="screen" id="screen-breakdown">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+    <button onclick="goTo('screen-home')" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;">← Home</button>
+    <p class="label">Rao's breakdown</p>
+    <div style="width:40px;"></div>
+  </div>
+  <div id="breakdown-loading" style="text-align:center;padding:40px 0;">
+    <div class="spinner" style="margin-bottom:16px;"></div>
+    <p>Rao is analysing your entire conversation...</p>
+  </div>
+  <div id="breakdown-content" style="display:none;">
+    <div class="card-purple" style="margin-bottom:14px;text-align:center;padding:20px 16px;">
+      <div class="score-big" id="breakdown-score">72</div>
+      <div class="score-sub" id="breakdown-headline">You stayed in the room — but gave ground too easily.</div>
+      <div class="score-grid">
+        <div class="score-pill"><div class="num" id="breakdown-score-p">7</div><div class="lbl">persuasion</div></div>
+        <div class="score-pill"><div class="num" id="breakdown-score-c">7</div><div class="lbl">confidence</div></div>
+        <div class="score-pill"><div class="num" id="breakdown-score-cl">8</div><div class="lbl">clarity</div></div>
+        <div class="score-pill"><div class="num" id="breakdown-score-co">6</div><div class="lbl">composure</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:10px;">
+      <p class="label" style="margin-bottom:6px;">Pattern Rao noticed</p>
+      <p id="breakdown-pattern" style="font-size:14px;"></p>
+    </div>
+    <div class="coach-what-worked">
+      <p class="coach-label" style="color:var(--t600);">Best moment</p>
+      <p class="coach-text" id="breakdown-best"></p>
+    </div>
+    <div class="coach-fix">
+      <p class="coach-label" style="color:var(--r400);">Weakest moment</p>
+      <p class="coach-text" id="breakdown-worst"></p>
+    </div>
+    <div class="coach-what-worked" style="margin-top:4px;">
+      <p class="coach-label" style="color:var(--t600);">What worked</p>
+      <p class="coach-text" id="breakdown-worked"></p>
+    </div>
+    <div class="coach-fix">
+      <p class="coach-label" style="color:var(--p600);">Fix this next time</p>
+      <p class="coach-text" id="breakdown-fix"></p>
+    </div>
+    <div class="technique-card" onclick="toggleTechnique()" style="margin-top:8px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <p class="label">Technique of the day</p>
+        <span style="font-size:12px;color:var(--p400);">Tap to learn more ↓</span>
+      </div>
+      <p style="font-size:14px;font-weight:600;color:var(--text);margin-top:4px;" id="breakdown-technique-name"></p>
+      <p style="font-size:13px;color:var(--text2);margin-top:4px;" id="breakdown-technique-short"></p>
+      <div class="technique-expanded" id="technique-detail">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;" id="breakdown-technique-long"></p>
+        <div style="margin-top:10px;padding:10px;background:var(--p50);border-radius:var(--sm);">
+          <p style="font-size:12px;font-weight:600;color:var(--p600);margin-bottom:4px;">What Rao wants you to do next</p>
+          <p style="font-size:12px;color:var(--p800);" id="breakdown-next"></p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
+      <button class="btn" onclick="nextConversation()">Next challenge</button>
+      <button class="btn-ghost" onclick="goTo('screen-home')">Back to home</button>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="goTo('screen-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div>
+    <div class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg><span>Train</span></div>
+    <div class="nav-item" onclick="goTo('screen-decoder')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Decode</span></div>
+    <div class="nav-item" onclick="goTo('screen-progress')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Progress</span></div>
+    <div class="nav-item" onclick="goTo('screen-progress')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div>
+  </div>
+</div>
+
+<!-- SCREEN 9: PEOPLE DECODER -->
+<div class="screen" id="screen-decoder">
+  <h2 style="margin-bottom:4px;">People decoder</h2>
+  <p style="margin-bottom:16px;">Paste what someone said. Rao decodes them completely.</p>
+  <textarea id="decoder-input" rows="4" placeholder="Paste their message or describe the situation..." oninput="checkDecoderBtn()" style="margin-bottom:10px;"></textarea>
+  <button class="btn" id="decoder-btn" disabled onclick="runDecoder()" style="margin-bottom:16px;">Decode them</button>
+  <div id="decoder-loading" style="display:none;text-align:center;padding:20px;">
+    <div class="spinner" style="margin-bottom:12px;"></div>
+    <p>Rao is reading them...</p>
+  </div>
+  <div id="decoder-result" style="display:none;">
+    <div class="card-teal">
+      <p class="label" style="color:var(--t600);margin-bottom:10px;">Rao's complete read</p>
+      <div style="margin-bottom:10px;"><p style="font-size:12px;font-weight:600;color:var(--t600);margin-bottom:3px;">Personality type</p><p style="font-size:14px;color:var(--t600);" id="decode-type"></p></div>
+      <div style="height:1px;background:#9FE1CB;margin-bottom:10px;"></div>
+      <div style="margin-bottom:10px;"><p style="font-size:12px;font-weight:600;color:var(--t600);margin-bottom:3px;">What they actually want</p><p style="font-size:14px;color:var(--t600);" id="decode-want"></p></div>
+      <div style="height:1px;background:#9FE1CB;margin-bottom:10px;"></div>
+      <div style="margin-bottom:10px;"><p style="font-size:12px;font-weight:600;color:var(--t600);margin-bottom:3px;">What they fear</p><p style="font-size:14px;color:var(--t600);" id="decode-fear"></p></div>
+      <div style="height:1px;background:#9FE1CB;margin-bottom:10px;"></div>
+      <div style="margin-bottom:10px;"><p style="font-size:12px;font-weight:600;color:var(--t600);margin-bottom:3px;">How to approach them</p><p style="font-size:14px;color:var(--t600);" id="decode-approach"></p></div>
+      <div style="height:1px;background:#9FE1CB;margin-bottom:10px;"></div>
+      <div style="margin-bottom:10px;"><p style="font-size:12px;font-weight:600;color:var(--t600);margin-bottom:3px;">What NOT to do</p><p style="font-size:14px;color:var(--t600);" id="decode-avoid"></p></div>
+      <div style="height:1px;background:#9FE1CB;margin-bottom:10px;"></div>
+      <div><p style="font-size:12px;font-weight:600;color:var(--t600);margin-bottom:3px;">Exact words to use</p><p style="font-size:14px;font-style:italic;color:var(--t600);" id="decode-words"></p></div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="goTo('screen-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div>
+    <div class="nav-item" onclick="startConversation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg><span>Train</span></div>
+    <div class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Decode</span></div>
+    <div class="nav-item" onclick="goTo('screen-progress')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Progress</span></div>
+    <div class="nav-item" onclick="goTo('screen-progress')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div>
+  </div>
+</div>
+
+<!-- SCREEN 10: PROGRESS -->
+<div class="screen" id="screen-progress">
+  <div style="text-align:center;margin-bottom:20px;">
+    <div style="width:60px;height:60px;border-radius:50%;background:var(--p50);border:2.5px solid var(--p400);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--p600);" id="avatar-initial">S</div>
+    <h2 id="profile-name">Swastik</h2>
+    <div class="presence-tag" style="margin-top:6px;" id="profile-type">The Hesitant Strategist</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px;">
+    <div class="card" style="text-align:center;padding:12px 8px;"><p style="font-size:22px;font-weight:700;color:var(--text);" id="progress-streak">1</p><p style="font-size:11px;color:var(--text3);">day streak</p></div>
+    <div class="card" style="text-align:center;padding:12px 8px;"><p style="font-size:22px;font-weight:700;color:var(--text);">12</p><p style="font-size:11px;color:var(--text3);">techniques</p></div>
+    <div class="card" style="text-align:center;padding:12px 8px;"><p style="font-size:22px;font-weight:700;color:var(--text);" id="progress-score">64</p><p style="font-size:11px;color:var(--text3);">presence</p></div>
+  </div>
+  <div class="card" style="margin-bottom:16px;">
+    <p class="label" style="margin-bottom:12px;">Your growth this week</p>
+    <div class="trait-row"><div class="trait-label">Confidence</div><div class="trait-bar-wrap"><div class="trait-bar-fill" style="width:48%;background:var(--p400);"></div></div><div class="trait-val" style="color:var(--t400);">+14%</div></div>
+    <div class="trait-row"><div class="trait-label">Persuasion</div><div class="trait-bar-wrap"><div class="trait-bar-fill" style="width:60%;background:var(--t400);"></div></div><div class="trait-val" style="color:var(--t400);">+7%</div></div>
+    <div class="trait-row"><div class="trait-label">Composure</div><div class="trait-bar-wrap"><div class="trait-bar-fill" style="width:35%;background:var(--r400);"></div></div><div class="trait-val" style="color:var(--t400);">+9%</div></div>
+    <div class="trait-row"><div class="trait-label">Trust building</div><div class="trait-bar-wrap"><div class="trait-bar-fill" style="width:62%;background:var(--p600);"></div></div><div class="trait-val" style="color:var(--t400);">+5%</div></div>
+  </div>
+  <div class="unlock-card" style="margin-bottom:16px;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--g600)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    <p style="font-size:13px;color:var(--g600);font-weight:500;">Negotiation unlocks in 3 sessions</p>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="goTo('screen-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div>
+    <div class="nav-item" onclick="startConversation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg><span>Train</span></div>
+    <div class="nav-item" onclick="goTo('screen-decoder')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Decode</span></div>
+    <div class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Progress</span></div>
+    <div class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div>
+  </div>
+</div>
+
+</div>
 <script src="config.js"></script>
 <script src="api.js"></script>
 <script src="app.js"></script>
