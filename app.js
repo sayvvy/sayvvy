@@ -384,7 +384,8 @@ function checkConvBtn() {
 
 async function sendUserResponse() {
   const input = document.getElementById('conv-input');
-  const userText = input.value.trim();
+  const userText = convUserText || document.getElementById('conv-input')?.value.trim() || '';
+convUserText = '';
   if(!userText) return;
 
   input.value = '';
