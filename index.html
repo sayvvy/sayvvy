@@ -250,11 +250,35 @@
   <div id="conv-hint-box" style="display:none;margin-bottom:8px;" class="card-purple">
     <p style="font-size:13px;color:var(--p800);" id="conv-hint-text"></p>
   </div>
-  <textarea id="conv-input" rows="3" placeholder="Type your response..." oninput="checkConvBtn()" style="margin-bottom:8px;"></textarea>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-    <button class="btn-ghost btn-sm" style="width:100%;" onclick="showHint()">💡 Hint</button>
-    <button class="btn-ghost btn-sm" style="width:100%;" id="conv-send-btn" disabled onclick="sendUserResponse()">Send →</button>
+  <div class="card" style="text-align:center;padding:16px;margin-bottom:8px;">
+  <div class="waveform" id="conv-waveform" style="margin-bottom:12px;">
+    <div class="wave-bar" style="height:6px;"></div>
+    <div class="wave-bar" style="height:10px;"></div>
+    <div class="wave-bar" style="height:6px;"></div>
+    <div class="wave-bar" style="height:14px;"></div>
+    <div class="wave-bar" style="height:8px;"></div>
+    <div class="wave-bar" style="height:18px;"></div>
+    <div class="wave-bar" style="height:10px;"></div>
+    <div class="wave-bar" style="height:6px;"></div>
+    <div class="wave-bar" style="height:14px;"></div>
+    <div class="wave-bar" style="height:8px;"></div>
+    <div class="wave-bar" style="height:16px;"></div>
+    <div class="wave-bar" style="height:6px;"></div>
   </div>
+  <button class="rec-btn" id="conv-rec-btn" onclick="toggleConvRecording()">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+      <rect x="9" y="2" width="6" height="13" rx="3" fill="white"/>
+      <path d="M5 10a7 7 0 0014 0" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <line x1="12" y1="19" x2="12" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <line x1="8" y1="23" x2="16" y2="23" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <p id="conv-rec-status" style="font-size:13px;color:var(--text3);margin-top:10px;">Tap to speak your response</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+  <button class="btn-ghost btn-sm" style="width:100%;" onclick="showHint()">💡 Hint</button>
+  <button class="btn-ghost btn-sm" style="width:100%;" id="conv-send-btn" disabled onclick="sendUserResponse()">Send response →</button>
+</div>
   <button class="end-btn" onclick="endConversation()">End conversation — get Rao's breakdown</button>
   <div class="bottom-nav">
     <div class="nav-item" onclick="goTo('screen-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div>
