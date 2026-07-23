@@ -73,7 +73,88 @@ async function toggleRecording() {
     startRecording();
   }
 }
+let convIsRecording = false;
+let convMediaRecorder = null;
+let convWaveInterval = null;
+let convUserText = '';
 
+async function toggleConvRecording() {
+  if(convIsRecording) {
+    stopConvRecording();
+  } else {
+    startConvRecording();
+  }
+}
+
+async function startConvRecording() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({audio: true});
+    convMediaRecorder = new MediaRecorder(stream);
+    const chunks = [];
+    convMediaRecorder.ondataavailable = e => chunks.push(e.data);
+    convMediaRecorder.onstop = async () => {
+      const blob = new Blob(chunks, {type: 'audio/webm'});
+      document.getElementById('conv-rec-status').textContent = 'Processing your response...';
+      const text = await transcribeConvAudio(blob);
+      convUserText = text;
+      document.getElementById('conv-rec-status').textContent = `"${text.substring(0, 60)}${text.length > 60 ? '...' : ''}"`;
+      document.getElementById('conv-send-btn').disabled = false;
+    };
+    convMediaRecorder.start();
+    convIsRecording = true;
+    document.getElementById('conv-rec-btn').classList.add('recording');
+    document.getElementById('conv-rec-status').textContent = 'Recording... tap to stop';
+    convWaveInterval = setInterval(() => {
+      document.querySelectorAll('#conv-waveform .wave-bar').forEach(b => {
+        b.style.height = (Math.random() * 32 + 6) + 'px';
+      });
+    }, 120);
+  } catch(e) {
+    document.getElementById('conv-rec-status').textContent = 'Microphone access needed.';
+  }
+}
+
+function stopConvRecording() {
+  if(convMediaRecorder && convMediaRecorder.state !== 'inactive') convMediaRecorder.stop();
+  if(convMediaRecorder) convMediaRecorder.stream.getTracks().forEach(t => t.stop());
+  convIsRecording = false;
+  clearInterval(convWaveInterval);
+  document.getElementById('conv-rec-btn').classList.remove('recording');
+}
+
+async function transcribeConvAudio(blob) {
+  if(CONFIG.assemblyai === 'YOUR_ASSEMBLYAI_KEY_HERE') {
+    return 'I understand your point but I think there is more to consider here.';
+  }
+  try {
+    const uploadRes = await fetch('https://api.assemblyai.com/v2/upload', {
+      method: 'POST',
+      headers: {'authorization': CONFIG.assemblyai},
+      body: blob
+    });
+    const uploadData = await uploadRes.json();
+    const transcriptRes = await fetch('https://api.assemblyai.com/v2/transcript', {
+      method: 'POST',
+      headers: {'authorization': CONFIG.assemblyai, 'content-type': 'application/json'},
+      body: JSON.stringify({audio_url: uploadData.upload_url})
+    });
+    const transcriptData = await transcriptRes.json();
+    const poll = () => new Promise(resolve => {
+      const check = async () => {
+        const res = await fetch(`https://api.assemblyai.com/v2/transcript/${transcriptData.id}`,
+          {headers: {'authorization': CONFIG.assemblyai}});
+        const data = await res.json();
+        if(data.status === 'completed') resolve(data.text);
+        else if(data.status === 'error') resolve('Could not transcribe. Please try again.');
+        else setTimeout(check, 2000);
+      };
+      check();
+    });
+    return await poll();
+  } catch(e) {
+    return 'Voice response recorded.';
+  }
+}
 async function startRecording() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({audio: true});
